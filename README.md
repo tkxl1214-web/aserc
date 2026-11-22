@@ -12,18 +12,19 @@ Apple Music에서 영감을 받은 블러·글래스 스타일의 음악 라이�
 
 플레이리스트와 로그인은 아직 서버 계정과 동기화되지 않습니다. 노래를 추가하거나 여러 기기에서 동기화하는 기능은 후속 작업으로 분리되어 있습니다.
 
-## Google 로그인 연결
+## Google 로그인
 
-1. Google Cloud Console에서 `aserc` 프로젝트에 웹 애플리케이션 OAuth 클라이언트 ID를 만듭니다.
-2. 승인된 JavaScript 원본에 배포 도메인 `https://aserc.p-e.kr`과 로컬 미리보기 주소를 추가합니다.
-3. 발급된 **클라이언트 ID**를 `index.html`의 `window.ASERC_GOOGLE_CLIENT_ID` 값에 넣습니다.
-4. 클라이언트 비밀번호는 이 저장소나 브라우저 코드에 넣지 않습니다. Google 로그인 토큰을 서버에서 검증하고 계정을 저장하는 기능은 백엔드가 준비될 때 추가해야 합니다.
+Google Cloud 프로젝트 `aserc`의 웹 OAuth 클라이언트 ID를 `index.html`에 연결했습니다. 승인된 JavaScript 원본은 다음 주소로 설정되어 있어야 합니다.
 
-이 정적 프로토타입은 Google의 서명된 ID 토큰에서 이름과 프로필 사진만 표시합니다. 토큰은 저장하지 않습니다.
+- `https://aserc.p-e.kr`
+- `https://tkxl1214-web.github.io`
+- `http://localhost:4173`
+
+Google Identity Services의 팝업 로그인만 사용하므로 리디렉션 URI는 필요하지 않습니다. 클라이언트 비밀번호는 이 저장소나 브라우저 코드에 넣지 않습니다. 이 정적 프로토타입은 Google ID 토큰에서 이름과 프로필 사진만 표시하며 토큰을 저장하지 않습니다. 토큰의 서버 검증, 계정 저장, 기기 간 동기화는 백엔드가 준비될 때 추가해야 합니다.
 
 ## GitHub Pages
 
-`.github/workflows/pages.yml`은 `main` 브랜치에 변경이 올라올 때 정적 페이지를 배포합니다. 첫 배포 전에 저장소 Settings → Pages에서 게시 소스를 **GitHub Actions**로 설정하세요. 사용자 지정 도메인을 쓸 경우 Pages 설정에 `aserc.p-e.kr`을 추가하고, DNS 제공업체에서 `aserc.p-e.kr`의 CNAME을 `tkxl1214-web.github.io`로 지정합니다.
+`.github/workflows/pages.yml`은 `main` 브랜치에 변경이 올라올 때 정적 페이지를 배포합니다. 저장소 Settings → Pages의 게시 소스는 **GitHub Actions**로 설정되어 있습니다. 사용자 지정 도메인은 Pages 설정에 `aserc.p-e.kr`로 등록했습니다. 도메인 제공업체에서 루트 CNAME(`aserc.p-e.kr`)의 대상으로 `tkxl1214-web.github.io`를 지정해야 합니다.
 
 로컬 미리보기는 Python이 설치된 환경에서 아래 명령으로 실행할 수 있습니다.
 
